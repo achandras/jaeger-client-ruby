@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
-require_relative './udp_sender/transport'
+require_relative './sender/transport'
 require 'socket'
 require 'thread'
 
 module Jaeger
   module Client
-    class UdpSender
+    class Sender
       def initialize(service_name:, host:, port:, collector:, flush_interval:, logger:)
         @service_name = service_name
         @collector = collector

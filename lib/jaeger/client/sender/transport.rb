@@ -2,7 +2,7 @@
 
 module Jaeger
   module Client
-    class UdpSender
+    class Sender
       class Transport
         FLAGS = 0
 

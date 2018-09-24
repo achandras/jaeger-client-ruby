@@ -13,7 +13,7 @@ require_relative 'client/scope'
 require_relative 'client/scope_manager'
 require_relative 'client/carrier'
 require_relative 'client/trace_id'
-require_relative 'client/udp_sender'
+require_relative 'client/sender'
 require_relative 'client/collector'
 require_relative 'client/version'
 require_relative 'client/samplers'
@@ -29,7 +29,7 @@ module Jaeger
                    sampler: Samplers::Const.new(true),
                    logger: Logger.new(STDOUT))
       collector = Collector.new
-      sender = UdpSender.new(
+      sender = Sender.new(
         service_name: service_name,
         host: host,
         port: port,
