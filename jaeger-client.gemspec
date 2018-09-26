@@ -28,4 +28,5 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency 'opentracing', '~> 0.3'
   spec.add_dependency 'thrift'
+  spec.add_dependency 'faraday'
 end

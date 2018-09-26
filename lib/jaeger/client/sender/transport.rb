@@ -14,6 +14,7 @@ module Jaeger
         end
 
         def write(str)
+          print(str)
           @buffer.write(str)
         end
 

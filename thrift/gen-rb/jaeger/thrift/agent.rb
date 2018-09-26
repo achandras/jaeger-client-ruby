@@ -21,10 +21,12 @@ module Jaeger
           send_oneway_message('emitZipkinBatch', EmitZipkinBatch_args, :spans => spans)
         end
         def emitBatch(batch)
+          puts "Client.emitBatch()"
           send_emitBatch(batch)
         end
 
         def send_emitBatch(batch)
+          puts "Client.send_emitBatch()"
           send_oneway_message('emitBatch', EmitBatch_args, :batch => batch)
         end
       end

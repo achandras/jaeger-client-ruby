@@ -27,7 +27,8 @@ module Jaeger
                    service_name:,
                    flush_interval: DEFAULT_FLUSH_INTERVAL,
                    sampler: Samplers::Const.new(true),
-                   logger: Logger.new(STDOUT))
+                   logger: Logger.new(STDOUT),
+                   http: false)
       collector = Collector.new
       sender = Sender.new(
         service_name: service_name,
@@ -35,7 +36,8 @@ module Jaeger
         port: port,
         collector: collector,
         flush_interval: flush_interval,
-        logger: logger
+        logger: logger,
+        http: http
       )
       sender.start
       Tracer.new(collector, sender, sampler)
