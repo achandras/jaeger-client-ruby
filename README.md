@@ -28,6 +28,15 @@ OpenTracing.start_active_span('span name') do
 end
 ```
 
+If using a different transport, the transport can be configured externally and passed into the tracer. An `emit_batch` function must be present to define how to write out the batch.
+```
+require 'jaeger/client'
+
+transport = Jaeger::Client::Sender::HTTPTransport(host: "http://localhost", port: 14268, endpoint: "/api/traces", headers: headers)
+
+OpenTracing.global_tracer = Jaeger::Client.build(host: 'localhost', port: 6831, service_name: 'echo')
+```
+
 See [opentracing-ruby](https://github.com/opentracing/opentracing-ruby) for more examples.
 
 ### Samplers

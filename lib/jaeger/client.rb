@@ -28,7 +28,12 @@ module Jaeger
                    flush_interval: DEFAULT_FLUSH_INTERVAL,
                    sampler: Samplers::Const.new(true),
                    logger: Logger.new(STDOUT),
-                   http: false)
+                   transport: nil)
+
+      if transport == nil
+          transport = Sender::UDPTransport.new(host, port)
+      end
+
       collector = Collector.new
       sender = Sender.new(
         service_name: service_name,
@@ -37,7 +42,7 @@ module Jaeger
         collector: collector,
         flush_interval: flush_interval,
         logger: logger,
-        http: http
+        transport: transport
       )
       sender.start
       Tracer.new(collector, sender, sampler)

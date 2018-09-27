@@ -3,7 +3,7 @@
 module Jaeger
   module Client
     class Sender
-      class Transport
+      class UDPTransport
         FLAGS = 0
 
         def initialize(host, port)
@@ -11,10 +11,16 @@ module Jaeger
           @host = host
           @port = port
           @buffer = ::Thrift::MemoryBufferTransport.new
+
+          protocol = ::Thrift::CompactProtocol.new(self)
+          @client = Jaeger::Thrift::Agent::Client.new(protocol)
+        end
+
+        def emit_batch(batch)
+          @client.emitBatch(batch)
         end
 
         def write(str)
-          print(str)
           @buffer.write(str)
         end
 
